@@ -9,6 +9,9 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 		<class>modelos.Usuario</class>
+		<class>modelos.Sensor</class>
+		<class>modelos.Ubicacion</class>
+		<class>modelos.Medicion</class>
 
 		<properties>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
