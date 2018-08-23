@@ -1,12 +1,14 @@
 package modelos;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -24,6 +26,7 @@ private static final long serialVersionUID = 1L;
 	
 	private int temperatura;
 	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha; 
 	
 	public Medicion() {}

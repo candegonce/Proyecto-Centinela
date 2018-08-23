@@ -1,18 +1,13 @@
 package modelos;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 import enumerativos.Rol;
 
@@ -32,12 +27,6 @@ public class Usuario implements Serializable {
 	private String password;
 	
 	private String apeynom;
-	
-	@ManyToOne
-	@Cascade(value = { CascadeType.ALL })
-	private Ubicacion domicilio;
-	
-	private Date fechaNacimiento; 
 	
 	private String sexo;
 	
@@ -74,22 +63,6 @@ public class Usuario implements Serializable {
 
 	public void setApeynom(String apeynom) {
 		this.apeynom = apeynom;
-	}
-
-	public Ubicacion getDomicilio() {
-		return domicilio;
-	}
-
-	public void setDomicilio(Ubicacion domicilio) {
-		this.domicilio = domicilio;
-	}
-
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
-
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	public String getSexo() {

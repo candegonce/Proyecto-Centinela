@@ -64,8 +64,6 @@ public class UsuarioControlador {
 			 System.out.println("Actualizando...");
 //				 u.setEmail(usuario.getEmail());
 				 u.setApeynom(usuario.getApeynom());
-				 u.setDomicilio(usuario.getDomicilio());
-				 u.setFechaNacimiento(usuario.getFechaNacimiento());
 				 u.setSexo(usuario.getSexo());
 				 u.setPassword(usuario.getPassword());
 				 u.setHabilitado(usuario.isHabilitado());

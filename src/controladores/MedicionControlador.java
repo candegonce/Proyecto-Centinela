@@ -1,5 +1,8 @@
 package controladores;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -76,6 +79,8 @@ public class MedicionControlador {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crear(Medicion medicion) {
+		Date fecha = new Date();
+		medicion.setFecha(fecha);
 		mdao.persistir(medicion);
 		return Response.status(Response.Status.CREATED).build();
 	}
