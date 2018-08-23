@@ -43,7 +43,7 @@ public class SensorControlador {
 	@GET
 	@Path("/obtener/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Sensor obtenerUsuario(@PathParam("id") long id) {
+	public Sensor obtenerSensor(@PathParam("id") long id) {
 		Sensor sen= sdao.encontrarPorId((int) id); 
 		if (sen == null) {
 			System.out.println("Sensor con id " + id + " no encontrado");
@@ -59,7 +59,7 @@ public class SensorControlador {
 	@Path("/editar/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editarSensor(@PathParam("id") int id, Sensor sensor){
+	public Response editar(@PathParam("id") int id, Sensor sensor){
 		 System.out.println(sensor.getIdSensor());
 		 Sensor s = sdao.encontrarPorId(id);
 		 if (s != null) {
