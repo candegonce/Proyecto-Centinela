@@ -44,7 +44,7 @@ public class UsuarioControlador {
 	public Usuario obtenerUsuario(@PathParam("id") long id) {
 		Usuario usu= udao.encontrarPorId((int) id); 
 		if (usu == null) {
-			System.out.println("Usuario con id " + id + " no encontrado");
+			System.out.println("Usuario con id " + id + " no encontrado.");
 			return null;
 		}else {
 			System.out.println("Retorno usuario: " + usu.getApeynom());
@@ -54,22 +54,27 @@ public class UsuarioControlador {
 	
 //	Actualizado un usuario dado mediante el id
 	@PUT
-	@Path("/editar/{id}")
+	@Path("/editar")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editarUsuario(@PathParam("id") int id, Usuario usuario){
+	public Response editarUsuario(Usuario usuario){
 		 System.out.println(usuario.getIdUsuario());
-		 Usuario u = udao.encontrarPorId(id);
+		 Usuario u = udao.encontrarPorId(usuario.getIdUsuario());
 		 if (u != null) {
+			 if (!u.getEmail().equals(usuario.getEmail())){
+				 if(udao.existeUsuario(usuario.getEmail())) {
+					 System.out.println("Email de usuario ya registrado.");
+					 return Response.status(Response.Status.CONFLICT).build();
+				 }
+			 
+			  }
 			 System.out.println("Actualizando...");
-//				 u.setEmail(usuario.getEmail());
-				 u.setApeynom(usuario.getApeynom());
-				 u.setSexo(usuario.getSexo());
-				 u.setPassword(usuario.getPassword());
-				 u.setHabilitado(usuario.isHabilitado());
-				 udao.actualizar(u);
-				 return Response.ok().entity(usuario).build();
+
+		     udao.actualizar(usuario);
+		     
+			 return Response.ok().entity(usuario).build();
 		 } else {
+			 System.out.println("Usuario no encontrado.");
 			 return Response.status(Response.Status.NOT_FOUND).entity("[]").build();
 		 }
 	}
@@ -82,9 +87,11 @@ public class UsuarioControlador {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crear(Usuario usuario){
 		if(udao.existeUsuario(usuario.getEmail())) {
+			System.out.println("Email de usuario ya registrado.");
 			 return Response.status(Response.Status.CONFLICT).build();
 		}else {
 			udao.persistir(usuario);
+			System.out.println("El usuario se creo correctamente.");
 			return Response.status(Response.Status.CREATED).build();
 		}
 	 }
@@ -97,10 +104,11 @@ public class UsuarioControlador {
 		Usuario aux = udao.encontrarPorId(id);
 		if (aux != null){
 			udao.borrar(aux);
+			System.out.println("Usuario eliminado.");
 			return Response.noContent().build();
 		} else {
-			String mensaje = "No existe el usuario con ese id";
-			return Response.status(Response.Status.NOT_FOUND).entity(mensaje).build();
+			System.out.println("Usuario no encontrado.");
+			return Response.status(Response.Status.NOT_FOUND).entity("No existe el usuario con ese id.").build();
 		}
 	}
 	
@@ -111,10 +119,9 @@ public class UsuarioControlador {
 	public Response loginUsuario(Usuario usuario) {
 			Usuario result= udao.loginUsuario(usuario.getEmail(),usuario.getPassword());
 			if (result == null) {
-				String mensaje = "Usuario y/o contraseña incorrecto";
-	   			return Response.status(Response.Status.NOT_FOUND).entity(mensaje).build();
+	   			return Response.status(Response.Status.NOT_FOUND).entity("Usuario y/o contraseña incorrecto.").build();
 	   		}else {   
-	   			System.out.println("Usuario logueado");
+	   			System.out.println("Usuario logueado.");
 	   			return Response.status(Response.Status.ACCEPTED).build();
 	   		}
 	}	

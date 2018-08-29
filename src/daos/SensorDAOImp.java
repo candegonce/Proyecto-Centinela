@@ -1,5 +1,7 @@
 package daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -13,7 +15,7 @@ public class SensorDAOImp extends GenericDAOImp<Sensor> implements SensorDAO {
 	}
 		
 	@Override
-	public boolean existeSensor(String codigo) {
+	public boolean existeSensor(int codigo) {
 		EntityManager em = EMF.getEMF().createEntityManager();
 		Query consulta= em.createQuery("from " + this.getPersistentClass().getSimpleName() + " where codigo= :codigo");
 		consulta.setParameter("codigo", codigo);
@@ -21,6 +23,19 @@ public class SensorDAOImp extends GenericDAOImp<Sensor> implements SensorDAO {
 			return false;
 		}else {
 			return true;
+		}
+	}
+	
+	@Override
+	public Sensor encontrarPorCodigo(int codigo) {
+		EntityManager em = EMF.getEMF().createEntityManager();
+		Query consulta = em.createQuery("from " + this.getPersistentClass().getSimpleName() + " where codigo= :codigo");
+		consulta.setParameter("codigo", codigo);
+		List<Sensor> resultado = consulta.getResultList();
+		if (resultado.isEmpty()) {
+			return null;
+		} else {
+			return (Sensor) resultado.get(0);
 		}
 	}
 }

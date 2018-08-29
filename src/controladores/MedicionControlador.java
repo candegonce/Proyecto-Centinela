@@ -1,7 +1,5 @@
 package controladores;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +44,7 @@ public class MedicionControlador {
 	public Medicion obtenerMedicion(@PathParam("id") long id) {
 		Medicion med = mdao.encontrarPorId((int) id);
 		if (med == null) {
-			System.out.println("Medicion con id " + id + " no encontrada");
+			System.out.println("Medicion con id " + id + " no encontrada.");
 			return null;
 		} else {
 			System.out.println("Retorno medicion: " + med.getIdMedicion());
@@ -55,19 +53,15 @@ public class MedicionControlador {
 	}
 
 	@PUT
-	@Path("/editar/{id}")
+	@Path("/editar")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editar(@PathParam("id") int id, Medicion medicion) {
+	public Response editar(Medicion medicion) {
 		System.out.println(medicion.getIdMedicion());
-		Medicion m = mdao.encontrarPorId(id);
+		Medicion m = mdao.encontrarPorId(medicion.getIdMedicion());
 		if (m != null) {
 			System.out.println("Actualizando...");
-			m.setDioxidoCarbono(medicion.getDioxidoCarbono());
-			m.setDispositivo(medicion.getDispositivo());
-			m.setFecha(medicion.getFecha());
-			m.setTemperatura(medicion.getTemperatura());
-			mdao.actualizar(m);
+			mdao.actualizar(medicion);
 			return Response.ok().entity(medicion).build();
 		} else {
 			return Response.status(Response.Status.NOT_FOUND).entity("[]").build();
@@ -82,6 +76,7 @@ public class MedicionControlador {
 		Date fecha = new Date();
 		medicion.setFecha(fecha);
 		mdao.persistir(medicion);
+		System.out.println("La medicion se creo correctamente.");
 		return Response.status(Response.Status.CREATED).build();
 	}
 
@@ -94,8 +89,8 @@ public class MedicionControlador {
 			mdao.borrar(m);
 			return Response.noContent().build();
 		} else {
-			String mensaje = "No existe la medicion con ese id";
-			return Response.status(Response.Status.NOT_FOUND).entity(mensaje).build();
+			System.out.println("Medicion no encontrada.");
+			return Response.status(Response.Status.NOT_FOUND).entity("No existe la medicion con ese id.").build();
 		}
 	}
 }

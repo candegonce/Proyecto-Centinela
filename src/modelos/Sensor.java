@@ -29,7 +29,7 @@ public class Sensor implements Serializable {
 	@Cascade(value = { CascadeType.ALL })
 	private Ubicacion ubicacion;
 	
-	private String codigo;
+	private int codigo;
 	
 	private int bateria;
 	
@@ -69,11 +69,11 @@ public class Sensor implements Serializable {
 		this.estado = estado;
 	}
 
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
