@@ -29,17 +29,31 @@ public class UsuarioDAOImp extends GenericDAOImp<Usuario> implements UsuarioDAO 
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Usuario loginUsuario(String mail, String pass) {
+	public Usuario loginUsuario(String email, String pass) {
 		EntityManager em = EMF.getEMF().createEntityManager();
 		Query consulta = em.createQuery(
-				"from " + this.getPersistentClass().getSimpleName() + " where mail= :mail and pass = :pass");
-		consulta.setParameter("mail", mail);
+				"from " + this.getPersistentClass().getSimpleName() + " where email= :email and password = :pass");
+		consulta.setParameter("email", email);
 		consulta.setParameter("pass", pass);
 		List<Usuario> result = consulta.getResultList();
 		if (result.isEmpty()) {
 			return null;
 		} else {
 			return result.get(0);
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Usuario encontrarPorEmail(String email) {
+		EntityManager em = EMF.getEMF().createEntityManager();
+		Query consulta = em.createQuery("from " + this.getPersistentClass().getSimpleName() + " where email= :email");
+		consulta.setParameter("email", email);
+		List<Usuario> resultado = consulta.getResultList();
+		if (resultado.isEmpty()) {
+			return null;
+		} else {
+			return resultado.get(0);
 		}
 	}
 }

@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
-public class Medicion implements Serializable {
+public class Medicion implements Serializable, Comparable<Medicion> {
 private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -28,7 +28,7 @@ private static final long serialVersionUID = 1L;
 	
 	private int temperatura;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha; 
 	
@@ -73,4 +73,9 @@ private static final long serialVersionUID = 1L;
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+	
+	
+	public int compareTo(Medicion m) {
+        return this.fecha.compareTo(m.getFecha());
+    }
 }

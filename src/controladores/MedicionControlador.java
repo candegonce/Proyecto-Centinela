@@ -1,5 +1,10 @@
 package controladores;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +28,7 @@ public class MedicionControlador {
 
 	private MedicionDAOImp mdao = FactoryDAO.getMedicionDAO();
 
-	// Listo todos las mediciones
+	// Listo todas las mediciones
 	@GET
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -33,6 +38,21 @@ public class MedicionControlador {
 			System.out.println("No hay mediciones.");
 			return null;
 		} else {
+			return mediciones;
+		}
+	}
+
+	// Obtengo todas las mediciones que realizo un sensor
+	@GET
+	@Path("/medicionesSensor/{idSensor}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Medicion> medicionesSensor(@PathParam("idSensor") long idSensor) {
+		List<Medicion> mediciones = mdao.obtenerMedicionesSensor(idSensor);
+		if (mediciones.isEmpty()) {
+			System.out.println("No hay mediciones para el Sensor con id: " + idSensor);
+			return null;
+		} else {
+			Collections.sort(mediciones);
 			return mediciones;
 		}
 	}
@@ -73,7 +93,20 @@ public class MedicionControlador {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response crear(Medicion medicion) {
-		Date fecha = new Date();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		String strDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"));
+        Date fecha = new Date();
+        try 
+        {  
+        	fecha = sdf.parse(strDate);  
+            System.out.println("La fecha es: "+fecha);  
+        } 
+        catch (ParseException e) 
+        {
+            e.printStackTrace();
+        }  
+        
 		medicion.setFecha(fecha);
 		mdao.persistir(medicion);
 		System.out.println("La medicion se creo correctamente.");

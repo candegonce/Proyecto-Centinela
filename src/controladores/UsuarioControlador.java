@@ -19,90 +19,103 @@ import modelos.Usuario;
 
 @Path("/usuarios")
 public class UsuarioControlador {
-	
-	
+
 	private UsuarioDAOImp udao = FactoryDAO.getUsuarioDAO();
-	
-	//Listo todos los usuarios
+
+	// Listo todos los usuarios
 	@GET
 	@Path("/listar")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Usuario> listar(){
+	public List<Usuario> listar() {
 		List<Usuario> usuarios = udao.listar();
 		if (usuarios.isEmpty()) {
 			System.out.println("No hay usuarios.");
 			return null;
-		}else {
+		} else {
 			return usuarios;
 		}
 	}
-	
-	//Obtengo un usuario 
+
+	// Obtengo un usuario
 	@GET
 	@Path("/obtener/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Usuario obtenerUsuario(@PathParam("id") long id) {
-		Usuario usu= udao.encontrarPorId((int) id); 
+		Usuario usu = udao.encontrarPorId((int) id);
 		if (usu == null) {
 			System.out.println("Usuario con id " + id + " no encontrado.");
 			return null;
-		}else {
+		} else {
 			System.out.println("Retorno usuario: " + usu.getApeynom());
 			return usu;
 		}
 	}
-	
-//	Actualizado un usuario dado mediante el id
+
+	// Obtengo un usuario por email
+	@GET
+	@Path("/obtenerPorEmail/{email}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Usuario obtenerUsuarioPorEmail(@PathParam("email") String email) {
+		Usuario usu = udao.encontrarPorEmail((String) email);
+		if (usu == null) {
+			System.out.println("Usuario con email " + email + " no encontrado.");
+			return null;
+		} else {
+			System.out.println("Retorno usuario: " + usu.getApeynom());
+			return usu;
+		}
+	}
+
+	// Actualizado un usuario dado mediante el id
 	@PUT
 	@Path("/editar")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editarUsuario(Usuario usuario){
-		 System.out.println(usuario.getIdUsuario());
-		 Usuario u = udao.encontrarPorId(usuario.getIdUsuario());
-		 if (u != null) {
-			 if (!u.getEmail().equals(usuario.getEmail())){
-				 if(udao.existeUsuario(usuario.getEmail())) {
-					 System.out.println("Email de usuario ya registrado.");
-					 return Response.status(Response.Status.CONFLICT).build();
-				 }
-			 
-			  }
-			 System.out.println("Actualizando...");
+	public Response editarUsuario(Usuario usuario) {
+		System.out.println(usuario.getIdUsuario());
+		Usuario u = udao.encontrarPorId(usuario.getIdUsuario());
+		if (u != null) {
+			if (!u.getEmail().equals(usuario.getEmail())) {
+				if (udao.existeUsuario(usuario.getEmail())) {
+					System.out.println("Email de usuario ya registrado.");
+					return Response.status(Response.Status.CONFLICT).build();
+				}
 
-		     udao.actualizar(usuario);
-		     
-			 return Response.ok().entity(usuario).build();
-		 } else {
-			 System.out.println("Usuario no encontrado.");
-			 return Response.status(Response.Status.NOT_FOUND).entity("[]").build();
-		 }
+			}
+			System.out.println("Actualizando...");
+
+			udao.actualizar(usuario);
+
+			return Response.ok().entity(usuario).build();
+		} else {
+			System.out.println("Usuario no encontrado.");
+			return Response.status(Response.Status.NOT_FOUND).entity("[]").build();
+		}
 	}
-	
-	
-//	Creo un usuario
+
+	// Creo un usuario
 	@POST
 	@Path("/crear")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response crear(Usuario usuario){
-		if(udao.existeUsuario(usuario.getEmail())) {
+	public Response crear(Usuario usuario) {
+		if (udao.existeUsuario(usuario.getEmail())) {
 			System.out.println("Email de usuario ya registrado.");
-			 return Response.status(Response.Status.CONFLICT).build();
-		}else {
+			return Response.status(Response.Status.CONFLICT).build();
+		} else {
 			udao.persistir(usuario);
 			System.out.println("El usuario se creo correctamente.");
 			return Response.status(Response.Status.CREATED).build();
 		}
-	 }
-	
-//	Elimino un usuario
+	}
+
+	// Elimino un usuario
 	@DELETE
 	@Path("/borrar/{id}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response borrar(@PathParam("id") Integer id){
+	public Response borrar(@PathParam("id") Integer id) {
 		Usuario aux = udao.encontrarPorId(id);
-		if (aux != null){
+		if (aux != null) {
 			udao.borrar(aux);
 			System.out.println("Usuario eliminado.");
 			return Response.noContent().build();
@@ -111,19 +124,19 @@ public class UsuarioControlador {
 			return Response.status(Response.Status.NOT_FOUND).entity("No existe el usuario con ese id.").build();
 		}
 	}
-	
-	
+
 	@POST
 	@Path("/login")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response loginUsuario(Usuario usuario) {
-			Usuario result= udao.loginUsuario(usuario.getEmail(),usuario.getPassword());
-			if (result == null) {
-	   			return Response.status(Response.Status.NOT_FOUND).entity("Usuario y/o contraseña incorrecto.").build();
-	   		}else {   
-	   			System.out.println("Usuario logueado.");
-	   			return Response.status(Response.Status.ACCEPTED).build();
-	   		}
-	}	
-	
+		Usuario user = udao.loginUsuario(usuario.getEmail(), usuario.getPassword());
+		if (user == null) {
+			return Response.status(Response.Status.NOT_FOUND).entity("Usuario y/o contraseña incorrecto.").build();
+		} else {
+			System.out.println("Usuario logueado.");
+			// return Response.status(Response.Status.ACCEPTED).build();
+			return Response.ok(user).build();
+		}
+	}
+
 }
