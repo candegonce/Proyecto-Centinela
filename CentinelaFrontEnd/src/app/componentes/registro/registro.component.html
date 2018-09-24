@@ -1,0 +1,28 @@
+<h2>{{titulo}}</h2>
+
+<div class="registroContainer">
+	<form #formUsuario="ngForm" (ngSubmit)="onSubmit()" class="col-lg-4"
+		ngNativeValidate>
+		<p>
+			<label><strong>Nombre y apellido:</strong> </label> 
+			<input type="text" class="form-control" name="apeynom" #apeynom="ngModel" [(ngModel)]="usuario.apeynom" required>
+		</p>
+		<p>
+			<label><strong>Correo:</strong> </label> 
+			<input type="text" class="form-control" name="email" #email="ngModel" [(ngModel)]="usuario.email" required>
+		</p>
+		<p>
+			<label><strong>Sexo: </strong></label> 
+			<input type="radio"	name="sexo" value="Hombre" #sexo="ngModel" [(ngModel)]="usuario.sexo">Hombre 
+			<input type="radio"	name="sexo" value="Mujer" #sexo="ngModel" [(ngModel)]="usuario.sexo">Mujer
+		</p>
+		<p>
+			<label><strong>Contraseña:</strong> </label> 
+			<input type="text" class="form-control" name="password" #password="ngModel" [(ngModel)]="usuario.password" required>
+		</p>
+		<p>
+			<input type="submit" value="Registrar" class="btn btn-primary">
+			<button class="btn btn-danger" (click)="volver()">Volver</button>
+		</p>
+	</form>
+</div>

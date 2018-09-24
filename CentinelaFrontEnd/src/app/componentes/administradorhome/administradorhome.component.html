@@ -1,0 +1,7 @@
+<h2>{{titulo}}</h2>
+
+
+<a [routerLink]="['/usuario-list']" [routerLinkActive]="['activado']" class="btn btn-primary">Listar usuarios</a>
+<a [routerLink]="['/dispositivo-list']" [routerLinkActive]="['activado']" class="btn btn-primary">Listar dispositivos</a>
+<a [routerLink]="['/agregar-dispositivo']" [routerLinkActive]="['activado']" class="btn btn-success">Agregar dispositivo</a>
+<button class="btn btn-danger" (click)="volver()">Volver</button>

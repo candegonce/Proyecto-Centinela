@@ -1,0 +1,119 @@
+<h2>{{titulo}}</h2>
+<hr>
+
+<ul>
+    <li>
+        <label><strong>Nombre: &nbsp; </strong></label>{{dispositivo.nombreSensor}}
+    </li>
+    <li>
+        <label><strong>Codigo:&nbsp;</strong></label>{{dispositivo.codigo}}
+    </li>    
+    <li>
+        <label><strong>Bateria:&nbsp;</strong></label>{{dispositivo.bateria}}
+    </li>
+    <li>
+        <label><strong>Estado:&nbsp;</strong></label>{{dispositivo.estado}}
+    </li>
+    <li>
+        <h1><label><strong>Ubicacion&nbsp;</strong></label></h1>
+        <hr>
+    </li>
+    <li>
+        <label><strong>Calle:&nbsp;</strong></label>{{dispositivo.ubicacion.calle}}
+    </li>
+    <li>
+        <label><strong>Numero:&nbsp;</strong></label>{{dispositivo.ubicacion.numero}}
+    </li>
+    <li>
+        <label><strong>Localidad:&nbsp;</strong></label>{{dispositivo.ubicacion.localidad}}
+    </li>
+</ul>
+
+<hr>
+
+<div class="container bootstrap snippet bg-light rounded">
+    <h1 class="text-center">Mediciones</h1>
+    <hr>
+    
+    
+  <div *ngIf="mediciones.length > 0; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <form class="form-inline">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input class="form-control form-control-sm ml-3 w-25" type="text" placeholder="Buscar" aria-label="Search">
+    </form>
+      <div class="row">
+        <div class="col-lg-12 mt-50">
+          <div class="main-box no-header clearfix">
+            <div class="main-box-body clearfix">
+              <div class="table-responsive mx-2">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                    <th><span><i class="fa fa-fw fa-sort"></i>Fecha</span></th>
+                    <th><span><i class="fa fa-fw fa-sort"></i>Temperatura</span></th>
+                    <th><span><i class="fa fa-fw fa-sort"></i>DioxidoCarbono</span></th>
+                    <th>&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let medicion of mediciones">
+                      <td>{{medicion.fecha}}</td>
+                      <td>{{medicion.temperatura}}</td>
+                      <td>{{medicion.dioxidoCarbono}}</td>
+                      <td class="text-center" style="width: 20%;">
+                        <a href="#" class="table-link danger">
+                          <span class="fa-stack">
+                            <i class="fas fa-trash-alt"></i>
+                          </span>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav aria-label="..." class="d-flex justify-content-end">
+          <ul class="pagination">
+              <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Anterior</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item active">
+                  <a class="page-link" href="#">2 <span class="sr-only">(Actual)</span></a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                  <a class="page-link" href="#">Siguiente</a>
+              </li>
+          </ul>
+    </nav>
+    <!-- ** Grafico ** -->
+    <hr>
+
+      <div class="col-md-6">
+        <canvas baseChart
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+        </canvas>
+      </div>
+
+      <div class="col-md-12 text-center" style="margin-top: 10px;height: 50%">
+        <button (click)="randomizeType()" style="display: inline-block">Toggle</button>
+      </div>
+
+    <!-- ** Fin Grafico **   -->
+</ng-template>
+<ng-template #elseBlock><p>No se han registrado mediciones</p></ng-template> 
+
+  
+</div>
+<hr>
+<button class="btn btn-danger" (click)="volver()">Volver</button>

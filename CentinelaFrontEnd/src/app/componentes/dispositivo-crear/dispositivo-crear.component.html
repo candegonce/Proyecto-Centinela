@@ -1,0 +1,32 @@
+<h2>{{titulo}}</h2>
+
+<div class="crearDispositivoContainer">
+	<form #formDispositivo="ngForm" (ngSubmit)="onSubmit()" class="col-lg-4"
+		ngNativeValidate>
+		<p>
+			<label><strong>Nombre:</strong> </label> 
+			<input type="text" class="form-control" name="nombreSensor" #nombre="ngModel" [(ngModel)]="sensor.nombreSensor" required>
+		</p>
+		<p>
+			<label><strong>Codigo:</strong> </label> 
+			<input type="number" class="form-control" name="codigo" #codigo="ngModel" [(ngModel)]="sensor.codigo" required>
+    </p>
+    
+    <p>
+			<label><strong>Calle:</strong> </label> 
+			<input type="text" class="form-control" name="calle" #calle="ngModel" [(ngModel)]="ubicacion.calle" required>
+		</p>
+		<p>
+			<label><strong>Numero:</strong> </label> 
+			<input type="number" class="form-control" name="numero" #numero="ngModel" [(ngModel)]="ubicacion.numero" required>
+    </p>
+    <p>
+			<label><strong>Localidad:</strong> </label> 
+			<input type="text" class="form-control" name="localidad" #localidad="ngModel" [(ngModel)]="ubicacion.localidad" required>
+		</p>
+		<p>
+			<input type="submit" value="Registrar" class="btn btn-primary">
+			<button class="btn btn-danger" (click)="volver()">Volver</button>
+		</p>
+	</form>
+</div>
