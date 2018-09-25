@@ -35,24 +35,9 @@ export class DispositivoCrearComponent implements OnInit {
       this.sensor.estado ="ACTIVO";
       this._sensorService.agregarSensor(this.sensor).subscribe(
           response => {
-            let usuario = this._loginService.getUser();
-            usuario.dispositivos.push(this.sensor);
-            this._usuarioService.editarUsuario(usuario).subscribe(
-              response => {
-                if(response.status == 200){
-                  //alert('Sensor agregado a la lista del usuario correctamente.');
-                  localStorage.setItem('currentUser', JSON.stringify(usuario));
-                  alert('Sensor creado correctamente.');
+           alert('Sensor creado correctamente.');
                   this.sensor = new Sensor();
                   this.sensor.ubicacion = new Ubicacion();
-                }
-            },
-            error => {
-                console.log(<any>error);
-                if(error.status == 409)
-                    alert('No se pudo agregar el sensor a la lista del usuario.')
-                }
-            );
        
           },
           error => {
