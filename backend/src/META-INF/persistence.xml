@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+
+	<persistence-unit name="Persistencia2018">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>modelos.Usuario</class>
+		<class>modelos.Sensor</class>
+		<class>modelos.Ubicacion</class>
+		<class>modelos.Medicion</class>
+
+		<properties>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+		
+								<!-- 	Configuracion BD Servidor -->
+			<property name="hibernate.connection.url" value="jdbc:mysql://mysql.java.linti.unlp.edu.ar:3306/bd2"/>
+			<property name="hibernate.connection.username" value="grupo2"/>
+			<property name="hibernate.connection.password" value="jyaa!grupo2"/>
+								
+								<!-- 	Configuracion BD Local -->
+<!-- 		    <property name="hibernate.connection.url" value="jdbc:mysql://localhost/centinela_bd" /> -->
+<!-- 			<property name="hibernate.connection.password" value="" /> -->
+<!-- 			<property name="hibernate.connection.username" value="root" /> -->
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+</persistence>
