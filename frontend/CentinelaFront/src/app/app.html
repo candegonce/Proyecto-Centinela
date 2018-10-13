@@ -1,0 +1,70 @@
+
+  <!-- Menu de usuario sin logearse  -->
+  <ion-menu id="loggedOutMenu" side="left" [content]="content">
+   
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Menu</ion-title>
+        </ion-toolbar>
+      </ion-header>
+  
+      <ion-content class="outer-content">
+        
+        <ion-list>
+          <ion-list-header>
+            Navegar
+          </ion-list-header>
+          <button ion-item menuClose *ngFor="let p of paginasComunes" (click)="openPage(p)">
+            <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+            {{p.title}}
+          </button>
+        </ion-list>
+          
+        <ion-list>
+          <ion-list-header>
+            Session
+          </ion-list-header>
+          <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
+            <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+            {{p.title}}
+          </button>
+        </ion-list>
+  
+      </ion-content>
+  
+  </ion-menu>
+
+  <!-- Menu de usuario logueado -->
+  <ion-menu id="loggedInMenu" side="left" [content]="content">
+    
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="outer-content">
+      <ion-list>
+        <ion-list-header>
+          Navegar
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of paginasComunes" (click)="openPage(p)">
+          <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+          {{p.title}}
+        </button>
+      </ion-list>
+
+      <ion-list>
+        <ion-list-header>
+          Session
+        </ion-list-header>
+        <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
+          <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
+          {{p.title}}
+        </button>
+      </ion-list>
+    </ion-content>
+  
+  </ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>

@@ -1,0 +1,11 @@
+<agm-map [latitude]="ubicacion.latitud" [longitude]="ubicacion.longitud" [zoom]="zoom">    
+    <agm-marker [latitude]="ubicacion.latitud" [longitude]="ubicacion.longitud" animation="BOUNCE" [openInfoWindow]="true">
+    </agm-marker>
+  <!-- <agm-marker *ngFor="let sensor of sensores" [latitude]="sensor.ubicacion.latitud" [longitude]="sensor.ubicacion.longitud" animation="BOUNCE" [openInfoWindow]="true"> -->
+           <!-- <agm-snazzy-info-window [maxWidth]="400" [closeWhenOthersOpen]="true">
+                  <ng-template>
+                    My first Snazzy Info Window!
+                  </ng-template>
+          </agm-snazzy-info-window> -->
+  <!-- </agm-marker> -->
+</agm-map>

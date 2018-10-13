@@ -1,0 +1,49 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color = "primary">
+    <ion-title>Registrarse</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>Nombre</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.apeynom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Género</ion-label>
+      <ion-select [(ngModel)]="usuario.sexo">
+        <ion-option value="Femenino">Femenino</ion-option>
+        <ion-option value="Masculino">Masculino</ion-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label>Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
+  
+  </ion-list>
+  
+  <div padding>
+    <button ion-button block full color="primary" (click)="register(user,usuario)">Aceptar registro</button>
+  </div>
+
+
+</ion-content>

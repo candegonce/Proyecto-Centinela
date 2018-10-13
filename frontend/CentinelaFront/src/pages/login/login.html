@@ -1,0 +1,84 @@
+<!--
+  Generated template for the LoginPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title> Login </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="login-content" padding>
+
+  <ion-row class="logo-row">
+    <ion-col></ion-col>
+    <ion-col width-67>
+      <img src="../../assets/imgs/icons8-rfid-signal-100.png" style="width: 100%;"/>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+
+  <div class="login-box">
+
+    <!-- Esto es para loguearse con usuario y contraseña -->
+
+    <form (ngSubmit)="login(user)" #registerForm="ngForm">
+      <ion-row>
+        <ion-col>
+          <ion-list inset>
+
+            <ion-item>
+              <ion-icon name="mail" item-start style="margin-left:2%;"></ion-icon> 
+              <ion-input type="email" placeholder="Email" name="email" [(ngModel)]="user.email" required></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-icon name="lock" item-start style="margin-left:2%;"></ion-icon>
+              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="user.password" required></ion-input>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button class="submit-btn" full type="submit" color="primary" [disabled]="!registerForm.form.valid">Login</button>
+        </ion-col>
+      </ion-row>
+      
+    </form>
+    
+      <ion-row>
+        <ion-col class="signup-col">
+          <button ion-button full (click)="irARegistro()" color="secondary">Registrarse</button>
+        </ion-col>
+      </ion-row>
+
+    <!-- fin logueo con usuario y contraseña -->
+
+      <!-- <button color="azulado" ion-button icon-start full (click)="webFacebookLogin()">
+        <ion-icon name="logo-facebook"></ion-icon>
+        <p style="margin-left: 10%;"> Ingresar con Facebook</p>
+      </button>
+
+      <button color="danger" ion-button full (click)="webGoogleLogin()">
+        <ion-icon name="logo-googleplus"></ion-icon>
+        <p style="margin-left: 10%;"> Ingresar con google</p>
+      </button>
+
+      <button color="light" ion-button full>
+        <ion-icon name="logo-twitter"></ion-icon>
+        <p style="margin-left: 10%;">Ingresar Twitter</p>
+      </button> -->
+    
+  </div>
+</ion-content>

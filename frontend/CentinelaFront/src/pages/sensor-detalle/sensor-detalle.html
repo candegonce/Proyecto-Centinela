@@ -1,0 +1,37 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Detalles del Sensor</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-header class="degrade" padding>
+      <ion-title color="dark">{{sensorParam.nombreSensor}} </ion-title>
+    </ion-card-header>
+
+    <ion-card-content class="fondo-elektu" style="margin-top:10%;">
+      
+      <div>Estado : {{sensorParam.estado}}</div>
+      <div>Código : {{sensorParam.codigo}}</div>
+      <div>Batería : {{sensorParam.bateria}}</div>
+      <div>Ubicación :</div>
+      <div>Calle : {{sensorParam.ubicacion.calle}}</div>
+      <div>Número : {{sensorParam.ubicacion.numero}}</div>
+      <div>Localidad : {{sensorParam.ubicacion.localidad}}</div>
+
+      <canvas #lineCanvas></canvas>
+
+      <p *ngIf="mediciones.length == 0"> Por el momento no se registraron mediciones </p>
+      <button *ngIf="estaLogueado == true && !tengoDispositivo()" ion-button round color="primary" (click)="agregarSensor()">Añadir a mis sensores</button>
+
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

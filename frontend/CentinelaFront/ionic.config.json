@@ -1,0 +1,7 @@
+{
+  "name": "ElektuIonic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

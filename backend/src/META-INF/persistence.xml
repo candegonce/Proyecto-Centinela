@@ -17,14 +17,14 @@
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
 		
 								<!-- 	Configuracion BD Servidor -->
-			<property name="hibernate.connection.url" value="jdbc:mysql://mysql.java.linti.unlp.edu.ar:3306/bd2"/>
-			<property name="hibernate.connection.username" value="grupo2"/>
-			<property name="hibernate.connection.password" value="jyaa!grupo2"/>
+ 			<property name="hibernate.connection.url" value="jdbc:mysql://mysql.java.linti.unlp.edu.ar:3306/bd2"/> 
+ 			<property name="hibernate.connection.username" value="grupo2"/> 
+ 			<property name="hibernate.connection.password" value="jyaa!grupo2"/> 
 								
 								<!-- 	Configuracion BD Local -->
-<!-- 		    <property name="hibernate.connection.url" value="jdbc:mysql://localhost/centinela_bd" /> -->
-<!-- 			<property name="hibernate.connection.password" value="" /> -->
-<!-- 			<property name="hibernate.connection.username" value="root" /> -->
+<!--		    <property name="hibernate.connection.url" value="jdbc:mysql://localhost/centinela_bd" /> -->
+<!--			<property name="hibernate.connection.password" value="" /> -->
+<!--			<property name="hibernate.connection.username" value="root" /> -->
 
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

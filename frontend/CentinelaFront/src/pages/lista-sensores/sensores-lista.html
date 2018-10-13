@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Lista de sensores</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content no-padding class="degrade">
+  <ion-list>
+    <button *ngFor="let sensor of sensores" ion-item (click)="verDetalleSensor(sensor)">{{sensor.nombreSensor}}</button>
+  </ion-list>
+</ion-content>
