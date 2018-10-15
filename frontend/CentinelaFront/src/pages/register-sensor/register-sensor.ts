@@ -28,12 +28,17 @@ export class RegisterSensorPage {
     console.log('ionViewDidLoad RegisterSensorPage');
   }
 
-  async register(sensor: Sensor,ubicacion: Ubicacion) {
+  async register(s: Sensor,u: Ubicacion) {
     try {
-      sensor.bateria = 100;
-      sensor.estado ="ACTIVO";
-      sensor.ubicacion = ubicacion;
-      this.sensorService.agregarSensor(sensor)
+      s.bateria = 100;
+      s.estado ="ACTIVO";
+      //pongo valores por defecto en las coordenadas
+      u.latitud = -34.9204948;
+      u.longitud = -57.95356570000001;
+
+      s.ubicacion = u;
+      console.log(s);
+      this.sensorService.agregarSensor(s)
         .subscribe(response => {
           console.log('Sensor creado correctamente:');
           alert('Sensor registrado correctamente.');

@@ -37,7 +37,7 @@ export class MyApp implements OnInit{
 
   paginasComunes: PageInterface[] = [
     { title: 'Sensores', name: 'SensoresListaPage', component: SensoresListaPage, tabComponent: SensoresListaPage, index: 0, icon: 'analytics' },
-    { title: 'Registrar Sensor', name: 'RegisterSensorPage', component: RegisterSensorPage, tabComponent: RegisterSensorPage, index: 1, icon: 'analytics' },
+    { title: 'Registrar Sensor', name: 'RegisterSensorPage', component: RegisterSensorPage, tabComponent: RegisterSensorPage, index: 1, icon: 'add-circle' },
     { title: 'Mapa', name: 'MapaPage', component: MapaPage, tabComponent: MapaPage, index: 2, icon: 'map' },
     { title: 'Acerca de', name: 'AboutPage', component: AboutPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
   ]

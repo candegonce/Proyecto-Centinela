@@ -14,10 +14,13 @@ export class SensorServiceProvider {
 
   public sensores: Sensor[] = [];
   sensor : Sensor = new Sensor();
-  public url : string = 'http://java.linti.unlp.edu.ar/ProyectoCentinela/controladores/sensores';
-  // public url : string = 'https://104.248.230.8/ProyectoCentinela/controladores/sensores';
+  public url : string;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    this.url = 'http://java.linti.unlp.edu.ar/ProyectoCentinela/controladores/sensores';
+    // this.url = 'https://104.248.230.8/ProyectoCentinela/controladores/sensores';
+    console.log('Hello SensorServiceProvider Provider');
+   }
 
   obtenerSensores() {
     return this.http.get(this.url + '/listar');
