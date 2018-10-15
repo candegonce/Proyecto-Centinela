@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 708:
+/***/ 710:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterPageModule", function() { return RegisterPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register__ = __webpack_require__(711);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__register__ = __webpack_require__(713);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,13 +38,13 @@ var RegisterPageModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 711:
+/***/ 713:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_usuario_service_usuario_service__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_usuario__ = __webpack_require__(174);
@@ -110,14 +110,16 @@ var RegisterPage = /** @class */ (function () {
         this.navParams = navParams;
         this.usuarioService = usuarioService;
         this.user = {};
+        this.usuario = new __WEBPACK_IMPORTED_MODULE_4__models_usuario__["a" /* Usuario */]();
     }
     RegisterPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad RegisterPage');
     };
     // Se registra en firebase para la autenticación y en nuestra bbdd para manipular los datos asociados.
-    RegisterPage.prototype.register = function (user) {
+    RegisterPage.prototype.register = function (user, u) {
         return __awaiter(this, void 0, void 0, function () {
             var result, usuarioNuevo, error_1;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -131,9 +133,14 @@ var RegisterPage = /** @class */ (function () {
                         usuarioNuevo.password = user.password;
                         usuarioNuevo.rol = "USUARIO";
                         usuarioNuevo.habilitado = true;
+                        usuarioNuevo.apeynom = u.apeynom;
+                        usuarioNuevo.sexo = u.sexo;
                         this.usuarioService.agregarUsuario(usuarioNuevo)
                             .subscribe(function (response) {
-                            console.log('Usuario creado correctamente:');
+                            console.log('Usuario creado correctamente.');
+                            _this.usuario = new __WEBPACK_IMPORTED_MODULE_4__models_usuario__["a" /* Usuario */]();
+                            _this.user = {};
+                            alert('Usuario creado correctamente.');
                         }, function (error) {
                             console.log(error);
                             if (error.status == 409) {
@@ -152,7 +159,7 @@ var RegisterPage = /** @class */ (function () {
     };
     RegisterPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-register',template:/*ion-inline-start:"C:\Proyecto centinela\ElektuIonic-master\src\pages\register\register.html"*/'<!--\n  Generated template for the RegisterPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color = "primary">\n    <ion-title>Registrarse</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list>\n\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Password</ion-label>\n      <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n    </ion-item>\n  \n  </ion-list>\n  \n  <div padding>\n    <button ion-button block full color="primary" (click)="register(user)">Aceptar registro</button>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Proyecto centinela\ElektuIonic-master\src\pages\register\register.html"*/,
+            selector: 'page-register',template:/*ion-inline-start:"C:\Desarrollo\linti\Proyecto Centinela\ProyectoCentinela\Proyecto-Centinela\frontend\CentinelaFront\src\pages\register\register.html"*/'<!--\n  Generated template for the RegisterPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color = "primary">\n    <ion-title>Registrarse</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list>\n    <ion-item>\n      <ion-label>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="usuario.apeynom"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Género</ion-label>\n      <ion-select [(ngModel)]="usuario.sexo">\n        <ion-option value="Femenino">Femenino</ion-option>\n        <ion-option value="Masculino">Masculino</ion-option>\n      </ion-select>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Contraseña</ion-label>\n      <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n    </ion-item>\n  \n  </ion-list>\n  \n  <div padding>\n    <button ion-button block full color="primary" (click)="register(user,usuario)">Aceptar registro</button>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Desarrollo\linti\Proyecto Centinela\ProyectoCentinela\Proyecto-Centinela\frontend\CentinelaFront\src\pages\register\register.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */],

@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 709:
+/***/ 712:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ConcursanteDetallePageModule", function() { return ConcursanteDetallePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SensorDetallePageModule", function() { return SensorDetallePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__concursante_detalle__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sensor_detalle__ = __webpack_require__(99);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ConcursanteDetallePageModule = /** @class */ (function () {
-    function ConcursanteDetallePageModule() {
+var SensorDetallePageModule = /** @class */ (function () {
+    function SensorDetallePageModule() {
     }
-    ConcursanteDetallePageModule = __decorate([
+    SensorDetallePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__concursante_detalle__["a" /* ConcursanteDetallePage */],
+                __WEBPACK_IMPORTED_MODULE_2__sensor_detalle__["a" /* SensorDetallePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__concursante_detalle__["a" /* ConcursanteDetallePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__sensor_detalle__["a" /* SensorDetallePage */]),
             ],
         })
-    ], ConcursanteDetallePageModule);
-    return ConcursanteDetallePageModule;
+    ], SensorDetallePageModule);
+    return SensorDetallePageModule;
 }());
 
-//# sourceMappingURL=concursante-detalle.module.js.map
+//# sourceMappingURL=sensor-detalle.module.js.map
 
 /***/ })
 

@@ -19,8 +19,9 @@ public class MedicionDAOImp extends GenericDAOImp<Medicion> implements MedicionD
 	@Override
 	public List<Medicion> obtenerMedicionesSensor(long idSensor) {
 		EntityManager em = EMF.getEMF().createEntityManager();
-		Query consulta= em.createQuery("from " + this.getPersistentClass().getSimpleName() + " where dispositivo.idSensor = :idSensor order by idMedicion desc limit 10");
+		Query consulta= em.createQuery("from " + this.getPersistentClass().getSimpleName() + " where dispositivo.idSensor = :idSensor order by idMedicion desc");
 		consulta.setParameter("idSensor", idSensor);
+		consulta.setMaxResults(15);
 		List<Medicion> resultado = consulta.getResultList();
 		return resultado;
 	}
