@@ -54,6 +54,8 @@
       <ng-template #elseBlock><b>Por el momento no se registraron mediciones</b></ng-template>
       <button *ngIf="estaLogueado == true && !tengoDispositivo()" ion-button
         round color="secondary" (click)="agregarSensor()">Añadir a mis sensores</button>
+        <button *ngIf="estaLogueado == true && tengoDispositivo()" ion-button
+        round color="danger" (click)="quitarSensor()">Quitar de mis sensores</button>  
     </ion-card-content>
   </ion-card>
 

@@ -1,4 +1,9 @@
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  ToastController
+} from "ionic-angular";
 
 import { Component, ViewChild } from "@angular/core";
 import { Sensor } from "../../models/Sensor";
@@ -30,7 +35,8 @@ export class SensorDetallePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public medicionService: MedicionServiceProvider,
-    public usuarioService: UsuarioServiceProvider
+    public usuarioService: UsuarioServiceProvider,
+    private toast: ToastController
   ) {
     this.sensorParam = navParams.get("sensorP");
     if (this.usuarioService.usuarioLogueado.email != null) {
@@ -126,38 +132,93 @@ export class SensorDetallePage {
       .editarUsuario(this.usuarioService.usuarioLogueado)
       .subscribe(
         (response: any) => {
-          if (response.status == 200) {
-            console.log(
-              "Sensor agregado a la lista del usuario correctamente."
-            );
-
-            localStorage.setItem(
-              "sensoresDelUsuario",
-              JSON.stringify(this.usuarioService.usuarioLogueado.dispositivos)
-            ); //podría prescindir si un web service me retorna la coleccion bajo demanda.
-            alert("Sensor agregado a la lista del usuario correctamente.");
-          }
+          // if (response.status == 200) {
+          console.log("Sensor agregado a la lista del usuario correctamente.");
+          //podría prescindir si un web service me retorna la coleccion bajo demanda.
+          localStorage.setItem(
+            "sensoresDelUsuario",
+            JSON.stringify(this.usuarioService.usuarioLogueado.dispositivos)
+          );
+          this.toast
+            .create({
+              message: `${
+                this.sensorParam.nombreSensor
+              } agregado a mis sensores correctamente.`,
+              duration: 5000
+            })
+            .present();
+        //    }
         },
         error => {
           console.log(<any>error);
-          if (error.status == 409)
-            alert("No se pudo agregar el sensor a la lista del usuario.");
+          //  if (error.status == 409)
+          this.toast
+            .create({
+              message: `No se pudo agregar ${
+                this.sensorParam.nombreSensor
+              } a mis sensores.`,
+              duration: 5000
+            })
+            .present();
         }
       );
-
-    console.log(
-      "sensor" +
-        this.sensorParam.nombreSensor +
-        " ha sido añadido al usuario " +
-        this.usuarioService.usuarioLogueado.email
-    );
   }
 
   tengoDispositivo(): boolean {
-    let misDispositivos = this.usuarioService.usuarioLogueado.dispositivos;
+    let misDispositivos = (JSON.parse(localStorage.getItem('sensoresDelUsuario')));
     for (var s of misDispositivos) {
       if (s.idSensor == this.sensorParam.idSensor) return true;
     }
     return false;
+  }
+
+  quitarSensor() {
+    console.log(this.usuarioService.usuarioLogueado.dispositivos);
+    let pos = -1;
+    for (pos = 0; pos < this.usuarioService.usuarioLogueado.dispositivos.length; pos++) {
+      if (this.usuarioService.usuarioLogueado.dispositivos[pos].idSensor === this.sensorParam.idSensor)
+        break;
+    }
+    console.log(pos);
+    
+    if (pos > -1) {
+      this.usuarioService.usuarioLogueado.dispositivos.splice(pos,1);
+      console.log(this.usuarioService.usuarioLogueado.dispositivos);
+      this.usuarioService
+        .editarUsuario(this.usuarioService.usuarioLogueado)
+        .subscribe(
+          (response: any) => {
+            console.log(
+              "sensor" +
+                this.sensorParam.nombreSensor +
+                " se ha quitado de la lista del usuario " +
+                this.usuarioService.usuarioLogueado.email
+            );
+            localStorage.setItem(
+              "sensoresDelUsuario",
+              JSON.stringify(this.usuarioService.usuarioLogueado.dispositivos)
+            );
+            this.toast
+              .create({
+                message: `${
+                  this.sensorParam.nombreSensor
+                } quitado de mis sensores correctamente.`,
+                duration: 5000
+              })
+              .present();
+          },
+          error => {
+            console.log(<any>error);
+            this.toast
+              .create({
+                message: `No se pudo quitar ${
+                  this.sensorParam.nombreSensor
+                } de mis sensores.`,
+                duration: 5000
+              })
+              .present();
+          }
+        );
+    }
   }
 }

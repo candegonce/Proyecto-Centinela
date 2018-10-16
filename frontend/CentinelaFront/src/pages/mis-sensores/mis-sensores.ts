@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Sensor } from '../../models/Sensor';
-import { SensorServiceProvider } from '../../providers/sensor-service/sensor-service';
+//import { SensorServiceProvider } from '../../providers/sensor-service/sensor-service';
 import { SensorDetallePage } from '../sensor-detalle/sensor-detalle';
 
 /**
@@ -22,8 +22,7 @@ export class MisSensoresPage {
   sensores: Sensor[] = [];
 
   constructor(public navCtrl: NavController,
-     public navParams: NavParams,
-      private sensorService: SensorServiceProvider) {
+     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -31,7 +30,8 @@ export class MisSensoresPage {
     // this.sensorService.obtenerSensores()
     //   .subscribe((respuesta: Sensor[]) => this.sensores = respuesta);
     
-    console.log(localStorage.getItem('sensoresDelUsuario')); // esto se carga cuando se loguea, aunque debería ser un servicio...yo lo cargo sin localstorage
+    // esto se carga cuando se loguea, aunque debería ser un servicio...yo lo cargo sin localstorage
+    console.log(localStorage.getItem('sensoresDelUsuario')); 
     // la onda sería hacer obtenerSensores(idUsuarioLogueado)
     this.sensores = (JSON.parse(localStorage.getItem('sensoresDelUsuario')));
   }

@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component } from "@angular/core";
+import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
 
-import { SensorServiceProvider } from '../../providers/sensor-service/sensor-service';
-import { Sensor } from '../../models/Sensor';
-import { Ubicacion } from '../../models/ubicacion';
+import { SensorServiceProvider } from "../../providers/sensor-service/sensor-service";
+import { Sensor } from "../../models/Sensor";
+import { Ubicacion } from "../../models/ubicacion";
 
 /**
  * Generated class for the RegisterSensorPage page.
@@ -14,46 +14,56 @@ import { Ubicacion } from '../../models/ubicacion';
 
 @IonicPage()
 @Component({
-  selector: 'page-register-sensor',
-  templateUrl: 'register-sensor.html',
+  selector: "page-register-sensor",
+  templateUrl: "register-sensor.html"
 })
 export class RegisterSensorPage {
   sensor = new Sensor();
   ubicacion = new Ubicacion();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sensorService: SensorServiceProvider) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public sensorService: SensorServiceProvider,
+    private toast: ToastController
+  ) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterSensorPage');
+    console.log("ionViewDidLoad RegisterSensorPage");
   }
 
-  async register(s: Sensor,u: Ubicacion) {
+  async register(s: Sensor, u: Ubicacion) {
     try {
       s.bateria = 100;
-      s.estado ="ACTIVO";
+      s.estado = "ACTIVO";
       //pongo valores por defecto en las coordenadas
       u.latitud = -34.9204948;
       u.longitud = -57.95356570000001;
 
       s.ubicacion = u;
       console.log(s);
-      this.sensorService.agregarSensor(s)
-        .subscribe(response => {
-          console.log('Sensor creado correctamente:');
-          alert('Sensor registrado correctamente.');
+      this.sensorService.agregarSensor(s).subscribe(
+        response => {
+          console.log("Sensor creado correctamente:");
+          this.toast
+            .create({
+              message: `${s.nombreSensor} registrado correctamente.`,
+              duration: 5000
+            })
+            .present();
         },
-          error => {
-            console.log(<any>error);
-            if (error.status == 409) {
-              alert('Sensor ya existe...');
-            }
-          }
-        )
+        error => {
+          console.log(<any>error);
+          this.toast
+            .create({
+              message: `Sensor con código ${s.codigo} ya existe.`,
+              duration: 5000
+            })
+            .present();
+        }
+      );
     } catch (error) {
       console.error(error);
     }
-
   }
-
 }

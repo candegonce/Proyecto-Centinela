@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, Nav, NavController, ToastController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
-import { LoginPage } from '../login/login';
+//import { AuthServiceProvider } from '../../providers/auth-service/auth-service';
+//import { LoginPage } from '../login/login';
 
 @IonicPage()
 @Component({
@@ -17,7 +17,7 @@ export class HomePage {
   firebaseUser : firebase.User;
 
   constructor(public navCtrl: NavController, private authFirebase: AngularFireAuth,
-     private toast: ToastController, private authService : AuthServiceProvider) { }
+     private toast: ToastController) { }
 
   ionViewDidLoad() {
     this.authFirebase.authState.subscribe((firebaseUserRes) => {

@@ -3,7 +3,7 @@ import * as firebase from 'firebase/app';
 import { AlertController, Events, IonicPage, Loading, LoadingController, NavController, NavParams } from 'ionic-angular';
 
 import { AngularFireAuth } from "angularfire2/auth";
-import { AuthServiceProvider } from './../../providers/auth-service/auth-service';
+//import { AuthServiceProvider } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
 import { HomePage } from '../home/home';
 import { Observable } from 'rx';
@@ -75,7 +75,8 @@ export class LoginPage {
           this.usuarioService.usuarioLogueado = usr;
           console.log(usr);
           console.log("El usuario logueado que se guardo en el service es:" + this.usuarioService.usuarioLogueado.email);
-          localStorage.setItem('sensoresDelUsuario', JSON.stringify(usr.dispositivos)); // Esto lo hago así porque vi que lo están usado así, pero guardar el usuario en el localstorage es una guasada
+          // Esto lo hago así porque vi que lo están usado así, pero guardar el usuario en el localstorage es una guasada
+          localStorage.setItem('sensoresDelUsuario', JSON.stringify(usr.dispositivos)); 
           this.event.publish('user:logueado');
           this.navCtrl.setRoot(HomePage);
           this.loading.dismissAll();
