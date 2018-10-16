@@ -1,2 +1,2 @@
-# Elektu Ionic
-Repositorio con el fin de modificar aspectos de elektu a Ionic
+# Centinela Front
+Repositorio de front end del proyecto centinela, medidor de CO2
