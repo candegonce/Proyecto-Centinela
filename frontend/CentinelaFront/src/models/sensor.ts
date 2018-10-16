@@ -10,6 +10,8 @@ export class Sensor {
     idSensor :number;
     nombreSensor:string;
 
-    constructor() { }
+    constructor() {
+        this.ubicacion = new Ubicacion();
+     }
 
 }
