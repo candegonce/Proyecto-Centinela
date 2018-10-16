@@ -1,2 +1,2 @@
 # Centinela Front
-Repositorio de front end del proyecto centinela, medidor de CO2
+Repositorio de front end del proyecto centinela, medidor de CO2.
