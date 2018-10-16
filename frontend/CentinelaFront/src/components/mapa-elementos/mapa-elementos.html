@@ -1,4 +1,4 @@
-<agm-map [latitude]="ubicacion.latitud" [longitude]="ubicacion.longitud" [zoom]="zoom">
+<agm-map [latitude]="ubicacion.latitud" [longitude]="ubicacion.longitud" [zoom]="zoom" (mapClick)="!seleccionHabilitada || ubicacionSeleccionada($event)">
   <agm-marker *ngFor="let sensor of sensores" [latitude]="sensor.ubicacion.latitud" [longitude]="sensor.ubicacion.longitud"
     animation="BOUNCE" [openInfoWindow]="true">
     <agm-info-window [maxWidth]="150">

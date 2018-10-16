@@ -1,9 +1,11 @@
-import { Component } from "@angular/core";
+/* global google */
+import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams, ToastController } from "ionic-angular";
 
 import { SensorServiceProvider } from "../../providers/sensor-service/sensor-service";
 import { Sensor } from "../../models/Sensor";
 import { Ubicacion } from "../../models/ubicacion";
+import { MapaElementosComponent } from "../../components/mapa-elementos/mapa-elementos";
 
 /**
  * Generated class for the RegisterSensorPage page.
@@ -21,6 +23,9 @@ export class RegisterSensorPage {
   sensor = new Sensor();
   ubicacion = new Ubicacion();
 
+    /* De esta manera voy a poder obtener los cambios que realiza el componente hijo que tiene el mapa */
+    @ViewChild('mapaHijo') mapaHijo: MapaElementosComponent;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,6 +35,11 @@ export class RegisterSensorPage {
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad RegisterSensorPage");
+    this.mapaHijo.emisorDeEvento.subscribe(res => {
+      this.ubicacion.latitud = res.latitud;
+      this.ubicacion.longitud = res.longitud;
+      console.log("Latitud" + this.ubicacion.latitud + " longitud " + this.ubicacion.longitud);
+    });
   }
 
   async register(s: Sensor, u: Ubicacion) {

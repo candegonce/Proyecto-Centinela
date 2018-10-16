@@ -1,5 +1,5 @@
 /* global google */
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { SensorServiceProvider } from '../../providers/sensor-service/sensor-service';
 import { Sensor } from '../../models/Sensor';
 import { Ubicacion } from '../../models/ubicacion';
@@ -18,14 +18,23 @@ export class MapaElementosComponent {
 
   sensores: Sensor[] = [];
 
-  // ubicación para centrar el mapa
+  /* Cuando se invoca la componente se puede enviar [seleccionHabilitada]="true" o "false" para que el mapa
+  permita colocar marcador o no */
+  @Input() seleccionHabilitada: boolean;
+
   ubicacion: Ubicacion = new Ubicacion();
+  ubicacionSeleccion: Ubicacion = new Ubicacion();
+
+  /* Esto es para que emita las coordenadas al componente padre */
+  @Output() emisorDeEvento: EventEmitter<Ubicacion> = new EventEmitter<Ubicacion>();
+
+  // ubicación para centrar el mapa
   zoom: number = 15;
 
   constructor(public sensorService: SensorServiceProvider) {
 
     // configuro la posición inicial
-    this.ubicacion.latitud= -34.9204948;
+    this.ubicacion.latitud = -34.9204948;
     this.ubicacion.longitud = -57.95356570000001;
 
     // esto representa uno de los sensores leídos desde la base de datos
@@ -50,5 +59,12 @@ export class MapaElementosComponent {
       .subscribe((respuesta: Sensor[]) => { this.sensores = respuesta; console.log(this.sensores); });
   }
 
+
+  ubicacionSeleccionada(event) {
+    // capaz tengo que cambiar acá de tipo antes de emitirlo
+    this.ubicacionSeleccion.latitud = Number(event.coords.lat);
+    this.ubicacionSeleccion.longitud = Number(event.coords.lng);
+    this.emisorDeEvento.emit(this.ubicacionSeleccion);
+  }
 
 }

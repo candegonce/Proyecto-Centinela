@@ -20,7 +20,7 @@ import { HttpModule } from "@angular/http";
 import { ListPage } from '../pages/list/list';
 //import { LoginPage } from './../pages/login/login';
 import { LoginPageModule } from '../pages/login/login.module';
-//import { MapaElementosComponent } from '../components/mapa-elementos/mapa-elementos';
+// import { MapaElementosComponent } from '../components/mapa-elementos/mapa-elementos';
 import { MyApp } from './app.component';
 //import { RegisterPage } from '../pages/register/register';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -33,6 +33,9 @@ import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-ser
 import { HomePageModule } from "../pages/home/home.module";
 import { ChartsModule } from "ng2-charts";
 import { MedicionServiceProvider } from '../providers/medicion-service/medicion-service';
+import { RegisterPage } from "../pages/register/register";
+import { RegisterSensorPage } from "../pages/register-sensor/register-sensor";
+import { RegisterSensorPageModule } from "../pages/register-sensor/register-sensor.module";
 
 @NgModule({
   declarations: [
@@ -51,7 +54,8 @@ import { MedicionServiceProvider } from '../providers/medicion-service/medicion-
     ComponentsModule,
     LoginPageModule,
     HomePageModule,
-    ChartsModule
+    ChartsModule,
+    RegisterSensorPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
