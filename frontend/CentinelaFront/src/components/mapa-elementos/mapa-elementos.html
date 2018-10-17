@@ -4,9 +4,9 @@
 
   <div *ngIf="!seleccionHabilitada; then thenBlock else elseBlock"></div>
   <ng-template #thenBlock>
- <!-- [iconUrl] = "'./assets/imgs/icons8-rfid-signal-100.png'" -->
+
     <agm-marker #marker *ngFor="let sensor of sensores"
-     
+      [iconUrl] = "icon"     
       [latitude]="sensor.ubicacion.latitud"
       [longitude]="sensor.ubicacion.longitud"
       animation="BOUNCE" [openInfoWindow]="true">
@@ -20,8 +20,11 @@
 
   </ng-template>
   <ng-template #elseBlock>
-    <agm-marker [latitude]="ubicacionSeleccion.latitud"
+    <agm-marker 
+      [iconUrl] = "icon"
+      [latitude]="ubicacionSeleccion.latitud"
       [longitude]="ubicacionSeleccion.longitud"
+      [iconUrl] = "'./assets/imgs/icons8-rfid-signal-100.png'"
       animation="BOUNCE" [openInfoWindow]="false">
     </agm-marker>
   </ng-template>

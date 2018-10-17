@@ -18,6 +18,14 @@ import { AgmMarker, MarkerManager, AgmMap } from "@agm/core";
 export class MapaElementosComponent implements OnInit{
   sensores: Sensor[] = [];
 
+  icon = {
+    url: './assets/imgs/icons8-rfid-signal-100.png', 
+    scaledSize: {
+      height: 40,
+      width: 40
+    }
+  };
+
   @Input("marker") marker : AgmMarker; 
 
   /* Cuando se invoca la componente se puede enviar [seleccionHabilitada]="true" o "false" para que el mapa

@@ -11,6 +11,7 @@ import { MedicionServiceProvider } from "../../providers/medicion-service/medici
 import { Medicion } from "../../models/medicion";
 //import { Chart } from "chart.js";
 import { UsuarioServiceProvider } from "../../providers/usuario-service/usuario-service";
+import { Observable, Subscription } from "rxjs/Rx";
 
 /**
  * Generated class for the SensorDetallePage page.
@@ -31,6 +32,9 @@ export class SensorDetallePage {
   public mediciones: Medicion[] = [];
   estaLogueado: boolean = false;
 
+  timer = Observable.timer(10000, 1000);
+  subscription : Subscription;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -50,8 +54,14 @@ export class SensorDetallePage {
   }
 
   ionViewDidLoad() {
-    this.armarGrafico();
+   this.subscription = this.timer.subscribe( t => this.armarGrafico());
+    // this.armarGrafico();
     console.log("ionViewDidLoad SensorDetallePage");
+  }
+
+  ionViewDidLeave(){
+    this.subscription.unsubscribe();
+    console.log("ionViewDidLeave SensorDetallePage");
   }
 
   armarGrafico() {
@@ -143,11 +153,11 @@ export class SensorDetallePage {
             .create({
               message: `${
                 this.sensorParam.nombreSensor
-              } agregado a mis sensores correctamente.`,
+                } agregado a mis sensores correctamente.`,
               duration: 5000
             })
             .present();
-        //    }
+          //    }
         },
         error => {
           console.log(<any>error);
@@ -156,7 +166,7 @@ export class SensorDetallePage {
             .create({
               message: `No se pudo agregar ${
                 this.sensorParam.nombreSensor
-              } a mis sensores.`,
+                } a mis sensores.`,
               duration: 5000
             })
             .present();
@@ -180,9 +190,9 @@ export class SensorDetallePage {
         break;
     }
     console.log(pos);
-    
+
     if (pos > -1) {
-      this.usuarioService.usuarioLogueado.dispositivos.splice(pos,1);
+      this.usuarioService.usuarioLogueado.dispositivos.splice(pos, 1);
       console.log(this.usuarioService.usuarioLogueado.dispositivos);
       this.usuarioService
         .editarUsuario(this.usuarioService.usuarioLogueado)
@@ -190,9 +200,9 @@ export class SensorDetallePage {
           (response: any) => {
             console.log(
               "sensor" +
-                this.sensorParam.nombreSensor +
-                " se ha quitado de la lista del usuario " +
-                this.usuarioService.usuarioLogueado.email
+              this.sensorParam.nombreSensor +
+              " se ha quitado de la lista del usuario " +
+              this.usuarioService.usuarioLogueado.email
             );
             localStorage.setItem(
               "sensoresDelUsuario",
@@ -202,7 +212,7 @@ export class SensorDetallePage {
               .create({
                 message: `${
                   this.sensorParam.nombreSensor
-                } quitado de mis sensores correctamente.`,
+                  } quitado de mis sensores correctamente.`,
                 duration: 5000
               })
               .present();
@@ -213,7 +223,7 @@ export class SensorDetallePage {
               .create({
                 message: `No se pudo quitar ${
                   this.sensorParam.nombreSensor
-                } de mis sensores.`,
+                  } de mis sensores.`,
                 duration: 5000
               })
               .present();
