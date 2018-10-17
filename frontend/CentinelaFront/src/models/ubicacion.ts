@@ -3,7 +3,7 @@ export class Ubicacion {
   calle:string;  
   numero:number;  
   localidad:string;  
-  longitud:number;   //Tiene que ser number para mi mapa
-  latitud:number;
+  longitud:any;   //Tiene que ser number para mi mapa
+  latitud:any;
   constructor(){}
 }

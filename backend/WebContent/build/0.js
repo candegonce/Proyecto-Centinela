@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 710:
+/***/ 709:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47,7 +47,7 @@ var RegisterPageModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_usuario_service_usuario_service__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_usuario__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_usuario__ = __webpack_require__(173);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -104,16 +104,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
  * Ionic pages and navigation.
  */
 var RegisterPage = /** @class */ (function () {
-    function RegisterPage(navCtrl, authFirebase, navParams, usuarioService) {
+    function RegisterPage(navCtrl, authFirebase, navParams, usuarioService, toast) {
         this.navCtrl = navCtrl;
         this.authFirebase = authFirebase;
         this.navParams = navParams;
         this.usuarioService = usuarioService;
+        this.toast = toast;
         this.user = {};
         this.usuario = new __WEBPACK_IMPORTED_MODULE_4__models_usuario__["a" /* Usuario */]();
     }
     RegisterPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad RegisterPage');
+        console.log("ionViewDidLoad RegisterPage");
     };
     // Se registra en firebase para la autenticación y en nuestra bbdd para manipular los datos asociados.
     RegisterPage.prototype.register = function (user, u) {
@@ -135,17 +136,24 @@ var RegisterPage = /** @class */ (function () {
                         usuarioNuevo.habilitado = true;
                         usuarioNuevo.apeynom = u.apeynom;
                         usuarioNuevo.sexo = u.sexo;
-                        this.usuarioService.agregarUsuario(usuarioNuevo)
-                            .subscribe(function (response) {
-                            console.log('Usuario creado correctamente.');
+                        this.usuarioService.agregarUsuario(usuarioNuevo).subscribe(function (response) {
+                            console.log("Usuario creado correctamente.");
+                            _this.toast
+                                .create({
+                                message: "Se ha registrado correctamente.",
+                                duration: 5000
+                            })
+                                .present();
                             _this.usuario = new __WEBPACK_IMPORTED_MODULE_4__models_usuario__["a" /* Usuario */]();
                             _this.user = {};
-                            alert('Usuario creado correctamente.');
                         }, function (error) {
                             console.log(error);
-                            if (error.status == 409) {
-                                alert('Usuario ya existe...');
-                            }
+                            _this.toast
+                                .create({
+                                message: "Ya existe un usuario con email " + user.email + ".",
+                                duration: 5000
+                            })
+                                .present();
                         });
                         return [3 /*break*/, 3];
                     case 2:
@@ -159,12 +167,13 @@ var RegisterPage = /** @class */ (function () {
     };
     RegisterPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-register',template:/*ion-inline-start:"C:\Desarrollo\linti\Proyecto Centinela\ProyectoCentinela\Proyecto-Centinela\frontend\CentinelaFront\src\pages\register\register.html"*/'<!--\n  Generated template for the RegisterPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color = "primary">\n    <ion-title>Registrarse</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list>\n    <ion-item>\n      <ion-label>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="usuario.apeynom"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Género</ion-label>\n      <ion-select [(ngModel)]="usuario.sexo">\n        <ion-option value="Femenino">Femenino</ion-option>\n        <ion-option value="Masculino">Masculino</ion-option>\n      </ion-select>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Contraseña</ion-label>\n      <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n    </ion-item>\n  \n  </ion-list>\n  \n  <div padding>\n    <button ion-button block full color="primary" (click)="register(user,usuario)">Aceptar registro</button>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Desarrollo\linti\Proyecto Centinela\ProyectoCentinela\Proyecto-Centinela\frontend\CentinelaFront\src\pages\register\register.html"*/,
+            selector: "page-register",template:/*ion-inline-start:"C:\Desarrollo\linti\Proyecto Centinela\ProyectoCentinela\Proyecto-Centinela\frontend\CentinelaFront\src\pages\register\register.html"*/'<!--\n  Generated template for the RegisterPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar color = "primary">\n    <ion-title>Registrarse</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-list>\n    <ion-item>\n      <ion-label>Nombre</ion-label>\n      <ion-input type="text" [(ngModel)]="usuario.apeynom"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-label>Género</ion-label>\n      <ion-select [(ngModel)]="usuario.sexo">\n        <ion-option value="Femenino">Femenino</ion-option>\n        <ion-option value="Masculino">Masculino</ion-option>\n      </ion-select>\n    </ion-item>\n\n\n    <ion-item>\n      <ion-label>Email</ion-label>\n      <ion-input type="text" [(ngModel)]="user.email"></ion-input>\n    </ion-item>\n  \n    <ion-item>\n      <ion-label>Contraseña</ion-label>\n      <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n    </ion-item>\n  \n  </ion-list>\n  \n  <div padding>\n    <button ion-button block full color="primary" (click)="register(user,usuario)">Aceptar registro</button>\n  </div>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Desarrollo\linti\Proyecto Centinela\ProyectoCentinela\Proyecto-Centinela\frontend\CentinelaFront\src\pages\register\register.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_auth__["a" /* AngularFireAuth */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_3__providers_usuario_service_usuario_service__["a" /* UsuarioServiceProvider */]])
+            __WEBPACK_IMPORTED_MODULE_3__providers_usuario_service_usuario_service__["a" /* UsuarioServiceProvider */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]])
     ], RegisterPage);
     return RegisterPage;
 }());

@@ -35,17 +35,17 @@
 
     <ion-item>
       <ion-label>Calle</ion-label>
-      <ion-input type="text" [(ngModel)]="ubicacion.calle"></ion-input>
+      <ion-input type="text" [(ngModel)]="sensor.ubicacion.calle"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Número</ion-label>
-      <ion-input type="number" [(ngModel)]="ubicacion.numero"></ion-input>
+      <ion-input type="number" [(ngModel)]="sensor.ubicacion.numero"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label>Localidad</ion-label>
-      <ion-input type="text" [(ngModel)]="ubicacion.localidad"></ion-input>
+      <ion-input type="text" [(ngModel)]="sensor.ubicacion.localidad"></ion-input>
     </ion-item>
 
   </ion-list>
@@ -54,9 +54,7 @@
   <!-- <mapa-elementos #mapaHijo></mapa-elementos> -->
 
   <div padding>
-    <button ion-button block full color="primary"
-      (click)="register(sensor,ubicacion)">Aceptar
-      registro</button>
+    <button ion-button block full color="primary" (click)="register()">Registrar sensor</button>
   </div>
 
 </ion-content>
