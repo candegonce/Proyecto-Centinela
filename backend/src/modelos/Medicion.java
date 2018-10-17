@@ -12,27 +12,27 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 @Entity
 public class Medicion implements Serializable, Comparable<Medicion> {
-private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue
 	private long idMedicion;
-	
+
 	@ManyToOne
 	private Sensor dispositivo;
-	
+
 	private int dioxidoCarbono;
-	
+
 	private int temperatura;
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy hh:mm:ss")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date fecha; 
-	
-	public Medicion() {}
+	private Date fecha;
+
+	public Medicion() {
+	}
 
 	public long getIdMedicion() {
 		return idMedicion;
@@ -73,9 +73,16 @@ private static final long serialVersionUID = 1L;
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
-	
+
 	public int compareTo(Medicion m) {
-        return this.fecha.compareTo(m.getFecha());
+//        return this.fecha.compareTo(m.getFecha());
+		if(this.idMedicion < m.getIdMedicion()) 
+			return -1;
+		else{
+			if(this.idMedicion == m.getIdMedicion())
+				return 0;
+			else
+				return 1;
+		}
     }
 }
