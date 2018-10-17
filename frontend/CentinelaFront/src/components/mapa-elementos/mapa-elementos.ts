@@ -3,7 +3,7 @@ import { Component, Output, EventEmitter, Input, OnInit } from "@angular/core";
 import { SensorServiceProvider } from "../../providers/sensor-service/sensor-service";
 import { Sensor } from "../../models/Sensor";
 import { Ubicacion } from "../../models/ubicacion";
-import { AgmMarker, MarkerManager, AgmMap } from "@agm/core";
+// import { AgmMarker } from "@agm/core";
 
 /**
  * Generated class for the MapaElementosComponent component.
@@ -26,7 +26,7 @@ export class MapaElementosComponent implements OnInit{
     }
   };
 
-  @Input("marker") marker : AgmMarker; 
+  // @Input("marker") marker : AgmMarker; 
 
   /* Cuando se invoca la componente se puede enviar [seleccionHabilitada]="true" o "false" para que el mapa
   permita colocar marcador o no */

@@ -1,4 +1,4 @@
-import { AngularFireAuth, AngularFireAuthModule } from "angularfire2/auth";
+import { AngularFireAuth } from "angularfire2/auth";
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
@@ -33,8 +33,8 @@ import { UsuarioServiceProvider } from '../providers/usuario-service/usuario-ser
 import { HomePageModule } from "../pages/home/home.module";
 import { ChartsModule } from "ng2-charts";
 import { MedicionServiceProvider } from '../providers/medicion-service/medicion-service';
-import { RegisterPage } from "../pages/register/register";
-import { RegisterSensorPage } from "../pages/register-sensor/register-sensor";
+// import { RegisterPage } from "../pages/register/register";
+// import { RegisterSensorPage } from "../pages/register-sensor/register-sensor";
 import { RegisterSensorPageModule } from "../pages/register-sensor/register-sensor.module";
 
 @NgModule({

@@ -15,7 +15,7 @@ export class HomePage {
   pages: Array<{title: string, component: any, hasChildren:boolean}>;
 
   firebaseUser : firebase.User;
-  imagenHome : string = "../../assets/imgs/CO2Home.jpg";
+  imagenHome : string = "./assets/imgs/CO2Home.jpg";
 
   constructor(public navCtrl: NavController, private authFirebase: AngularFireAuth,
      private toast: ToastController) { }

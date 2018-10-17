@@ -2,7 +2,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AgmMap } from '@agm/core';
+// import { AgmMap } from '@agm/core';
 
 /**
  * Generated class for the MapaPage page.
