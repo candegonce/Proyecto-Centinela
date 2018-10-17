@@ -1,11 +1,29 @@
-<agm-map #mapa [latitude]="ubicacion.latitud" [longitude]="ubicacion.longitud" [zoom]="zoom" (mapClick)="!seleccionHabilitada || ubicacionSeleccionada($event)">
-  <agm-marker #marker *ngFor="let sensor of sensores" [latitude]="sensor.ubicacion.latitud" [longitude]="sensor.ubicacion.longitud"
-    animation="BOUNCE" [openInfoWindow]="true">
-    <agm-info-window [maxWidth]="150">
-      <strong style="color:black;">{{sensor.nombreSensor}}</strong>
-      <p style="color:darkslategray;">Código: {{sensor.codigo}}</p>
-      <p style="color: darkslategray;">Estado: {{sensor.estado}}</p>
-      <p style="color:darkslategray;">Batería: {{sensor.bateria}}</p>
-    </agm-info-window>
-  </agm-marker>
+<agm-map #mapa [latitude]="ubicacion.latitud" [longitude]="ubicacion.longitud"
+  [zoom]="zoom" (mapClick)="!seleccionHabilitada ||
+  ubicacionSeleccionada($event)">
+
+  <div *ngIf="!seleccionHabilitada; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+ <!-- [iconUrl] = "'./assets/imgs/icons8-rfid-signal-100.png'" -->
+    <agm-marker #marker *ngFor="let sensor of sensores"
+     
+      [latitude]="sensor.ubicacion.latitud"
+      [longitude]="sensor.ubicacion.longitud"
+      animation="BOUNCE" [openInfoWindow]="true">
+      <agm-info-window [maxWidth]="150">
+        <strong style="color:black;">{{sensor.nombreSensor}}</strong>
+        <p style="color:darkslategray;">Código: {{sensor.codigo}}</p>
+        <p style="color: darkslategray;">Estado: {{sensor.estado}}</p>
+        <p style="color:darkslategray;">Batería: {{sensor.bateria}}</p>
+      </agm-info-window>
+    </agm-marker>
+
+  </ng-template>
+  <ng-template #elseBlock>
+    <agm-marker [latitude]="ubicacionSeleccion.latitud"
+      [longitude]="ubicacionSeleccion.longitud"
+      animation="BOUNCE" [openInfoWindow]="false">
+    </agm-marker>
+  </ng-template>
+
 </agm-map>
